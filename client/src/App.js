@@ -1,11 +1,19 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import Dogs from './components/Dogs/Dogs';
 import Form from './components/Form/Form'
 import useStyles from './styles'
+import { useDispatch } from 'react-redux';
+import { fetchDogs } from './actions/dogs'
+
 
 const App = ()=>{
+    const dispatch = useDispatch();
     const styles = useStyles();
+
+    useEffect(()=>{
+        dispatch(fetchDogs());
+    },[dispatch])
 
     return (
         <Container maxwidth="lg">
