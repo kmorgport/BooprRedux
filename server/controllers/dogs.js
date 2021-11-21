@@ -13,3 +13,19 @@ export const getDogs = async (req, res) => {
         res.status(404).json({ message: error.message })
     }
 }
+
+export const postDog = async (req, res) => {
+    const dog = req.body;
+
+    const newDog = new DogModel(dog);
+
+    try{
+
+        await newDog.save();
+        
+        res.status(202).json(newDog);
+
+    }catch (error){
+        res.status(409).json({ message: error.message})
+    }
+}
