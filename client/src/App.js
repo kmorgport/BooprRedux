@@ -2,12 +2,15 @@ import React from 'react';
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import Dogs from './components/Dogs/Dogs';
 import Form from './components/Form/Form'
+import useStyles from './styles'
 
 const App = ()=>{
+    const styles = useStyles();
+
     return (
         <Container maxwidth="lg">
-            <AppBar position="static" color="inherit">
-                <Typography variant="h2" align="center">Boopr</Typography>
+            <AppBar position="static" color="inherit" className={styles.appBar}>
+                <Typography variant="h2" align="center" className={styles.heading}>Boopr</Typography>
             </AppBar>
             <Grow in>
                 <Container>
