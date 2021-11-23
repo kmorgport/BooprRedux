@@ -18,6 +18,7 @@ export const postDog = async (req, res) => {
     const dog = req.body;
 
     const newDog = new DogModel(dog);
+    console.log(dog)
 
     try{
 

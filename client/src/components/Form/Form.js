@@ -2,17 +2,24 @@ import React, {useState} from 'react';
 import Filebase from 'react-file-base64'
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import useStyles from './styles';
+import { useDispatch} from 'react-redux'
+import { createDog } from '../../actions/dogs'
 
 const Form = () => {
+    const dispatch = useDispatch();
     const [dogData, setDogData] = useState({
         name: "",
         bio: "",
         breeds: "",
         picture: "",
-        sex: null
+        sex: ""
     })
     const classes = useStyles();
-    const handleSubmit = ()=>{}
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        dispatch(createDog(dogData))
+        console.log(dogData)
+    }
 
     const onChangeNameHandler = e =>{
         setDogData({

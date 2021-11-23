@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: "http://localhostL:5000"
+    baseURL: "http://localhost:5000"
 })
 
 export const fetchDogs = () => API.get(`/dogs`)

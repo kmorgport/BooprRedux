@@ -9,5 +9,16 @@ export const fetchDogs = () => async (dispatch) =>{
     }catch(error){
         console.log(error.message)
     }
+}
+
+export const createDog = (newDog) => async (dispatch) => {
+
+    try{
+        const { data } = await api.createDog(newDog)
+
+        dispatch({ type: 'CREATE', payload: data })
+    }catch(error){
+        console.log(error.message)
+    }
 
 }
