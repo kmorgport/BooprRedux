@@ -7,7 +7,7 @@ const Dog = ({dog})=>{
     
     return (
         <Card className={classes.card} raised elevation={6}>
-            <CardMedia className={classes.cardAction} title={dog.name}/>
+            <CardMedia className={classes.media} title={dog.name}/>
             <div className={classes.overlay}>
                 <Typography variant="h6">{dog.name}</Typography>
             </div>
@@ -15,7 +15,7 @@ const Dog = ({dog})=>{
                 <Typography variant="body2" color="textSecondary">{dog.breeds.map((breed)=> `${breed} `)}</Typography>
             </div>
             <CardContent>
-                <Typography className={classes.title} variant="h5" gutterBottom>{dog.message}</Typography>
+                <Typography className={classes.title} variant="h5" gutterBottom>{dog.bio}</Typography>
             </CardContent>
         </Card>
     )
