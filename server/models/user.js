@@ -18,6 +18,10 @@ const userSchema = mongoose.Schema({
     },
     packs: {
         type: [String]
+    },
+    pups:
+    {
+        type: [String]
     }
 })
 
