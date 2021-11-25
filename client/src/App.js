@@ -1,26 +1,23 @@
-import React , {useEffect} from 'react';
+import React from 'react';
 import { Container} from '@material-ui/core';
 import Home from './components/Home/Home';
-import { useDispatch } from 'react-redux';
-import { fetchDogs } from './actions/dogs'
 import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import Auth from './components/Auth/Auth';
 
 
 
 const App = ()=>{
-    const dispatch = useDispatch();
 
-    useEffect(()=>{
-        dispatch(fetchDogs());
-    },[dispatch])
-
+    const user = JSON.parse(localStorage.getItem('profile'));
+    
     return (
         <BrowserRouter>
             <Container maxwidth="lg">
                 <Navbar/>
                 <Routes>
                     <Route path="/dogs" element={<Home/>}/>
+                    <Route path="/auth" exact element={()=> (!user ? <Auth/> : <Navigate to="/posts"/>)}/>
                     <Route path="*" element={<Navigate to="/dogs"/>}/>
                 </Routes>
             </Container>

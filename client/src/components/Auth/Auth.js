@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { Avatar, Button, Paper, Grid, Typography, Grid, Container, TextField } from '@material-ui/core';
+import { GoogleLogin } from 'react-google-login';
 import useStyles from './styles';
+import Icon from './icon';
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
@@ -40,6 +42,14 @@ const Auth = ()=>{
         }
     }
 
+    const googleSuccess = (res)=>{
+        console.log(res)
+    };
+
+    const googleFailure = ()=>{
+        console.log("Google Sign In was unsuccessful. Try again later.")
+    };
+
     return (
         <Container component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
@@ -61,6 +71,22 @@ const Auth = ()=>{
                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" :  "password"} handleShowPassword={handleShowPassword}/>
                         {isSignUp && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password"/>}
                     </Grid>
+                    <GoogleLogin
+                        clientId={process.env.GOOGLE_ID}
+                        render={(renderProps)=> (
+                            <Button 
+                                className={classes.googleButton} 
+                                color="primary" 
+                                fullWidth 
+                                onClick={renderProps.onClick} 
+                                disabled={renderProps.disabled} 
+                                startIcon={<Icon/>} 
+                                variant="contained">Google Sign In</Button>
+                        )}
+                        onSuccess={googleSuccess}
+                        onFailure={googleFailure}
+                        cookiePolicy="single_host_origin"
+                    />
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
                 </form>
             </Paper>
