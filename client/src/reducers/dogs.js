@@ -1,8 +1,10 @@
+import { FETCH_ALL,CREATE } from '../constants/actionTypes';
+
 const reducers = (state = [], action )=> {
     switch(action.type){
-        case "FETCH_ALL":
+        case FETCH_ALL:
             return action.payload;
-        case 'CREATE':
+        case CREATE:
             return [...state, action.payload]
         default:
             return state

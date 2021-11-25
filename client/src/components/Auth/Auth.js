@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import { Avatar, Button, Paper, Grid, Typography, Grid, Container, TextField } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography,Container} from '@material-ui/core';
 import { GoogleLogin } from 'react-google-login';
 import useStyles from './styles';
 import Icon from './icon';
-import { useHistory } from 'react-router-dom'
+import Input from './Input'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { signUp, signIn } from '../../actions/auth'
@@ -17,7 +18,7 @@ const initialState = {
 }
 
 const Auth = ()=>{
-    const history = useHistory();
+    const history = useNavigate();
     const dispatch = useDispatch()
     const classes = useStyles();
     const [ isSignUp, setIsSignUp] = useState(false);
@@ -27,6 +28,11 @@ const Auth = ()=>{
 
     const handleChange = (e)=>{
         setFormData({ ...formData, [e.target.name]: e.target.value })
+    }
+
+    const switchMode = ()=>{
+        setIsSignUp( (previousSignUp)=> !previousSignUp )
+        setShowPassword(false)
     }
 
     const handleShowPassword = ()=>{
@@ -71,6 +77,7 @@ const Auth = ()=>{
                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" :  "password"} handleShowPassword={handleShowPassword}/>
                         {isSignUp && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password"/>}
                     </Grid>
+                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
                     <GoogleLogin
                         clientId={process.env.GOOGLE_ID}
                         render={(renderProps)=> (
@@ -87,7 +94,13 @@ const Auth = ()=>{
                         onFailure={googleFailure}
                         cookiePolicy="single_host_origin"
                     />
-                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
+                    <Grid container justify="flex-end">
+                        <Grid item>
+                            <Button onClick={switchMode}>
+                                { isSignUp ? 'Already have an account? Sign in' : "Don't already have an account? Sign Up!"}
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </form>
             </Paper>
         </Container>

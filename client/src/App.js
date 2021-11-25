@@ -17,7 +17,8 @@ const App = ()=>{
                 <Navbar/>
                 <Routes>
                     <Route path="/dogs" element={<Home/>}/>
-                    <Route path="/auth" exact element={()=> (!user ? <Auth/> : <Navigate to="/posts"/>)}/>
+                    <Route path="/auth" element={!user ? <Auth/> : <Navigate to="/dogs"/>}/>
+                    {/* <Route path="/auth" exact element={<Auth/>}/> */}
                     <Route path="*" element={<Navigate to="/dogs"/>}/>
                 </Routes>
             </Container>
