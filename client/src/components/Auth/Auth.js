@@ -18,8 +18,9 @@ const initialState = {
 }
 
 const Auth = ()=>{
+    const [ user, setUser ] = useState(JSON.parse(localStorage.getItem('profile')));
     const history = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const classes = useStyles();
     const [ isSignUp, setIsSignUp] = useState(false);
     const [ formData, setFormData ] = useState(initialState);
@@ -48,8 +49,17 @@ const Auth = ()=>{
         }
     }
 
-    const googleSuccess = (res)=>{
-        console.log(res)
+    const googleSuccess = async (res)=>{
+        const result = res?.profileObj;
+        const token = res?.tokenId;
+
+        try{
+
+            dispatch({ type: 'AUTH', data:{result, token}})
+
+        }catch(err){
+            console.log(err)
+        }
     };
 
     const googleFailure = ()=>{
