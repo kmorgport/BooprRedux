@@ -19,7 +19,7 @@ const initialState = {
 
 const Auth = ()=>{
     const [ user, setUser ] = useState(JSON.parse(localStorage.getItem('profile')));
-    const history = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const classes = useStyles();
     const [ isSignUp, setIsSignUp] = useState(false);
@@ -43,9 +43,9 @@ const Auth = ()=>{
     const handleSubmit = (e) =>{
         e.preventDefault();
         if(isSignUp){
-            dispatch(signUp(formData, history))
+            dispatch(signUp(formData, navigate))
         }else{
-            dispatch(signIn(formData, history))
+            dispatch(signIn(formData, navigate))
         }
     }
 
@@ -56,7 +56,7 @@ const Auth = ()=>{
         try{
 
             dispatch({ type: 'AUTH', data:{result, token}})
-
+            navigate('/');
         }catch(err){
             console.log(err)
         }
@@ -89,7 +89,7 @@ const Auth = ()=>{
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
                     <GoogleLogin
-                        clientId={process.env.GOOGLE_ID}
+                        clientId="343837463263-qdol1jbm86q9ar4ku9hv1t87jbdjkg0p.apps.googleusercontent.com"
                         render={(renderProps)=> (
                             <Button 
                                 className={classes.googleButton} 
