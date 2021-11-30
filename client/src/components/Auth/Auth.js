@@ -27,6 +27,8 @@ const Auth = ()=>{
     const [ showPassword, setShowPassword] = useState(false);
 
 
+
+
     const handleChange = (e)=>{
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
@@ -89,7 +91,7 @@ const Auth = ()=>{
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
                     <GoogleLogin
-                        clientId="placeholder"
+                        clientId={process.env.REACT_APP_GOOGLE_ID}
                         render={(renderProps)=> (
                             <Button 
                                 className={classes.googleButton} 

@@ -17,6 +17,7 @@ const Navbar = ()=>{
 
         setUser(JSON.parse(localStorage.getItem('profile')))
     },[location])
+    
 
     const logout = ()=>{
         dispatch({ type: "LOGOUT"});

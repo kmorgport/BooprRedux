@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Container} from '@material-ui/core';
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar';
@@ -9,8 +9,12 @@ import Auth from './components/Auth/Auth';
 
 
 const App = ()=>{
+    let user = JSON.parse(localStorage.getItem('profile'));
 
-    const user = JSON.parse(localStorage.getItem('profile'));
+    useEffect(()=>{
+        user = JSON.parse(localStorage.getItem('profile'));
+    },[user])
+
     
     return (
         <BrowserRouter>
