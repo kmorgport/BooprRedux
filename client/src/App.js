@@ -9,11 +9,11 @@ import Auth from './components/Auth/Auth';
 
 
 const App = ()=>{
-    let user = JSON.parse(localStorage.getItem('profile'));
+    let  user = JSON.parse(localStorage.getItem('profile'));
 
     useEffect(()=>{
         user = JSON.parse(localStorage.getItem('profile'));
-    },[user])
+    },[])
 
     
     return (
@@ -21,10 +21,10 @@ const App = ()=>{
             <Container maxwidth="lg">
                 <Navbar/>
                 <Routes>
-                    <Route path="/dogs" element={<Home/>}/>
-                    <Route path="/auth" element={!user ? <Auth/> : <Navigate to="/dogs"/>}/>
+                    <Route path="/dogs" element={user ? <Home/> : <Navigate replace to="/auth"/>}/>
+                    <Route path="/auth" element={!user ? <Auth/> : <Navigate replace to="/dogs"/>}/>
                     {/* <Route path="/auth" exact element={<Auth/>}/> */}
-                    <Route path="*" element={<Navigate to="/dogs"/>}/>
+                    <Route path="*" element={<Navigate replace to="/dogs"/>}/>
                 </Routes>
             </Container>
         </BrowserRouter>
