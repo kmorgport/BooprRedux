@@ -44,7 +44,7 @@ export const updateDog = async ( req, res, next ) => {
 
 }
 
-export const deletePost = async (req, res)=>{
+export const deleteDog = async (req, res)=>{
     const { id } = req.params;
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No posts with id: ${id}`);
     
