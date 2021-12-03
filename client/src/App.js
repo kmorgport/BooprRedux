@@ -20,13 +20,7 @@ const App = ()=>{
     }
 
 
-    let  user = JSON.parse(localStorage.getItem('profile'));
 
-    useEffect(()=>{
-        
-    },[])
-
-    
     return (
         <BrowserRouter>
             <Container maxwidth="lg">
