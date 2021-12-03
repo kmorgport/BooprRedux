@@ -24,6 +24,7 @@ const Navbar = ()=>{
 
     const logout = ()=>{
         dispatch({ type: "LOGOUT"});
+        navigate('/')
         setUser(null);
 
     }

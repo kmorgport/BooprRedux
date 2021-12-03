@@ -14,6 +14,12 @@ const App = ()=>{
         return isAuthenticated ? children : <Navigate to={redirectTo}/>;
     }
 
+    function BlockAuth({children, redirectTo}){
+        let isAuthenticated = JSON.parse(localStorage.getItem('profile'));
+        return !isAuthenticated ? children : <Navigate to={redirectTo}/>;
+    }
+
+
     let  user = JSON.parse(localStorage.getItem('profile'));
 
     useEffect(()=>{
@@ -32,7 +38,13 @@ const App = ()=>{
                         </RequireAuth>
                         // user ? <Home/> : <Navigate replace to="/auth"/>
                         }/>
-                    <Route path="/auth" element={!user ? <Auth/> : <Navigate replace to="/dogs"/>}/>
+                    {/* <Route path="/auth" element={!user ? <Auth/> : <Navigate replace to="/dogs"/>}/> */}
+                    <Route path="/auth" element={
+                        <BlockAuth redirectTo="/dogs">
+                            <Auth/>
+                        </BlockAuth>
+                        // user ? <Home/> : <Navigate replace to="/auth"/>
+                        }/>
                     {/* <Route path="/auth" exact element={<Auth/>}/> */}
                     <Route path="*" element={<Navigate replace to="/dogs"/>}/>
                 </Routes>
