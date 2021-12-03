@@ -1,9 +1,13 @@
-import React from 'react'
-import { Card, CardContent, CardMedia, Typography} from '@material-ui/core'
+import React, {useState} from 'react'
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase} from '@material-ui/core'
 import useStyles  from './styles';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import { useDispatch } from 'react-redux';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { boopDog, deleteDog } from '../../../actions/dogs';
 
 

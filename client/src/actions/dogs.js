@@ -1,4 +1,4 @@
-import { FETCH_ALL,CREATE, BOOP } from '../constants/actionTypes';
+import { FETCH_ALL,CREATE, BOOP, DELETE } from '../constants/actionTypes';
 import * as api from '../api';
 
 export const fetchDogs = () => async (dispatch) =>{
@@ -33,6 +33,16 @@ export const boopDog = (id)=> async (dispatch)=>{
         dispatch({ type: BOOP, payload: data});
 
     }catch (error){
+        console.log(error)
+    }
+}
+
+export const deleteDog = (id) => async (dispatch) =>{
+    try{
+        await api.deleteDog(id);
+
+        dispatch({type: DELETE, payload: id})
+    }catch(error){
         console.log(error)
     }
 }

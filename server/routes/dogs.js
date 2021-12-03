@@ -6,7 +6,7 @@ import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.get('/',auth, getDogs);
+router.get('/',getDogs);
 
 router.post('/', auth, postDog);
 router.patch('/:id', auth, updateDog);

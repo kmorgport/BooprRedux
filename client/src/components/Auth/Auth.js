@@ -46,8 +46,10 @@ const Auth = ()=>{
         e.preventDefault();
         if(isSignUp){
             dispatch(signUp(formData, navigate))
+            navigate('/')
         }else{
             dispatch(signIn(formData, navigate))
+            navigate('/')
         }
     }
 

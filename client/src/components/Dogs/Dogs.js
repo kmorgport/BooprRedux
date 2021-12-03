@@ -4,7 +4,7 @@ import useStyles from './styles';
 import { useSelector } from 'react-redux';
 import { Grid } from "@material-ui/core"
 
-const Dogs = ()=>{
+const Dogs = ({ setCurrentId })=>{
     const dogs = useSelector((state)=> state.dogs);
     const classes = useStyles();
     if(!dogs.length) return "No Posts"
@@ -13,11 +13,9 @@ const Dogs = ()=>{
             {
                 dogs.map((dog)=>(
                     <Grid key={dog._id} item xs={12} sm={6} lg={3}>
-                        <Dog dog={dog}/>
+                        <Dog dog={dog} setCurrentId={setCurrentId}/>
                     </Grid>
-                ))
-            }
-
+                ))}
         </Grid>
     )
 }

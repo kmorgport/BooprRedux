@@ -9,10 +9,15 @@ import Auth from './components/Auth/Auth';
 
 
 const App = ()=>{
+    function RequireAuth({children, redirectTo}){
+        let isAuthenticated = JSON.parse(localStorage.getItem('profile'));
+        return isAuthenticated ? children : <Navigate to={redirectTo}/>;
+    }
+
     let  user = JSON.parse(localStorage.getItem('profile'));
 
     useEffect(()=>{
-        user = JSON.parse(localStorage.getItem('profile'));
+        
     },[])
 
     
@@ -21,7 +26,12 @@ const App = ()=>{
             <Container maxwidth="lg">
                 <Navbar/>
                 <Routes>
-                    <Route path="/dogs" element={user ? <Home/> : <Navigate replace to="/auth"/>}/>
+                    <Route path="/dogs" element={
+                        <RequireAuth redirectTo="/auth">
+                            <Home/>
+                        </RequireAuth>
+                        // user ? <Home/> : <Navigate replace to="/auth"/>
+                        }/>
                     <Route path="/auth" element={!user ? <Auth/> : <Navigate replace to="/dogs"/>}/>
                     {/* <Route path="/auth" exact element={<Auth/>}/> */}
                     <Route path="*" element={<Navigate replace to="/dogs"/>}/>

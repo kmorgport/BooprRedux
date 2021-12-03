@@ -14,6 +14,9 @@ const Navbar = ()=>{
     useEffect(()=>{
 
         const token = user?.token;
+        if(token){
+            // logout();
+        }
 
         setUser(JSON.parse(localStorage.getItem('profile')))
     },[location])
@@ -21,7 +24,6 @@ const Navbar = ()=>{
 
     const logout = ()=>{
         dispatch({ type: "LOGOUT"});
-        navigate('/auth');
         setUser(null);
 
     }
