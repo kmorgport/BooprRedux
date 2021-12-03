@@ -23,7 +23,28 @@ const Home = () =>{
                     <Grid item xs={12} sm={6} md={9}>
                         <Dogs setCurrentId={setCurrentId}/>
                     </Grid>
-                    <Form/>
+                    <Grid item xs={12} sm={6} md={3}>
+                    <AppBar className={classes.appBarSearch} position="static" color="inherit">
+                        <TextField
+                            name="search"
+                            variant="outlined"
+                            label="Search Puppers"
+                            onKeyPress={handleKeyPress}
+                            fullWidth
+                            value={search}
+                            onChange={e=> setSearch(e.target.value)}/>
+                        <ChipInput
+                            style={{margin: '10px 0'}}
+                            value={breeds}
+                            onAdd= {handleAdd}
+                            onDelete={handleDelete}
+                            label="Search Breeds"
+                            variant="outlined"
+                        />
+                        <Button onClick={searchPost} className={classes.searchButton} color="primary" variant="contained"/>
+                    </AppBar>
+                        <Form/>
+                    </Grid>
                 </Grid>
             </Container>
         </Grow>

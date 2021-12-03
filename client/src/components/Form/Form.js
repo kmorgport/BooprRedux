@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import Filebase from 'react-file-base64'
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import useStyles from './styles';
-import { useDispatch} from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import { createDog } from '../../actions/dogs'
 
 const Form = () => {
+    
     const dispatch = useDispatch();
     const [dogData, setDogData] = useState({
         name: "",
@@ -14,6 +15,9 @@ const Form = () => {
         picture: "",
         sex: ""
     })
+
+    const user = JSON.parse(localStorage.getItem('profile'));
+    
     const classes = useStyles();
     const handleSubmit = (e)=>{
         e.preventDefault();
