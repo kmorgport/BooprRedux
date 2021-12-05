@@ -2,13 +2,14 @@ import React from 'react';
 import Dog from './Dog/Dog';
 import useStyles from './styles';
 import { useSelector } from 'react-redux';
-import { Grid } from "@material-ui/core"
+import { CircularProgress, Grid } from "@material-ui/core"
 
 const Dogs = ({ setCurrentId })=>{
-    const dogs = useSelector((state)=> state.dogs);
+    const {dogs, isLoading }= useSelector((state)=> state);
     const classes = useStyles();
-    if(!dogs.length) return "No Posts"
+    if(!dogs.length && !isLoading) return "No Posts"
     return(
+        isLoading ? <CircularProgress/> : (
         <Grid className={classes.container} container alignItems="stretch" spacing="3">
             {
                 dogs.map((dog)=>(
@@ -17,6 +18,7 @@ const Dogs = ({ setCurrentId })=>{
                     </Grid>
                 ))}
         </Grid>
+        )
     )
 }
 

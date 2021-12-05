@@ -20,7 +20,7 @@ const Home = () =>{
     const query = useQuery();
     const navigate = useNavigate();
     const page = query.get('page') || 1
-    const searchQuery = query.get('search')
+    const searchQuery = query.get('searchQuery')
     const [ search, setSearch ] = useState('');
     const [breeds, setBreeds ] = useState([]);
 
@@ -28,8 +28,10 @@ const Home = () =>{
         dispatch(fetchDogs());
     },[currentId])
 
-    const handleKeyPress = ()=>{
-
+    const handleKeyPress = (e)=>{
+        if(e.keyCode === 13){
+            searchPost();
+        }
     }
     
     const handleAdd = ()=>{
@@ -37,7 +39,7 @@ const Home = () =>{
     }
 
     const handleDelete = ()=>{
-        
+
     }
     
     const searchPost = ()=>{
