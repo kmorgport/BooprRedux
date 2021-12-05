@@ -1,21 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grow, Grid} from '@material-ui/core';
+import { Container, Grow, Grid, AppBar, TextField, Button} from '@material-ui/core';
 import useStyles from './styles';
-import { fetchDogs } from '../../actions/dogs'
+import ChipInput from 'material-ui-chip-input';
+import { fetchDogs, getDogsBySearch } from '../../actions/dogs'
 import { useDispatch } from 'react-redux';
 import Dogs from '../Dogs/Dogs';
 import Form from '../Form/Form';
+import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
+function useQuery(){
+    return new URLSearchParams(useLocation().search)
+}
 
 const Home = () =>{
     const [currentId, setCurrentId] = useState(0);
     const dispatch = useDispatch();
     const classes = useStyles();
+    const query = useQuery();
+    const navigate = useNavigate();
+    const page = query.get('page') || 1
+    const searchQuery = query.get('search')
+    const [ search, setSearch ] = useState('');
+    const [breeds, setBreeds ] = useState([]);
 
     useEffect(()=>{
         dispatch(fetchDogs());
     },[currentId])
+
+    const handleKeyPress = ()=>{
+
+    }
     
+    const handleAdd = ()=>{
+
+    }
+
+    const handleDelete = ()=>{
+        
+    }
+    
+    const searchPost = ()=>{
+        if(search.trim()|| breeds){
+            dispatch(getDogsBySearch({ search, breeds: breeds.join(',')}))
+            navigate(`/dogs/search?searchQuery=${search|| 'none'}&breeds=${breeds.join(',')}`)
+        }else{
+            navigate('/')
+        }
+    }
+
     return(
         <Grow in>
             <Container maxWidth="xl">

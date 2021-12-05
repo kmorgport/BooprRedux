@@ -5,12 +5,27 @@ export const getDogs = async (req, res) => {
     try{
     
         const dogs = await DogModel.find();
-        console.log(dogs);
 
         res.status(200).json(dogs);
 
     }catch(error){
         res.status(404).json({ message: error.message })
+    }
+}
+
+export const fetchDogsBySearch = async(req, res, next)=>{
+    const { searchQuery, breeds } = req.query 
+    
+    try{
+        const dog = new RegExp(searchQuery, 'i');
+        const dogs = await DogModel.find({
+            $or: [ {dog}, {breeds: {$in: breeds.split(',')} } ]
+        })
+
+        res.json({data: dogs})
+
+    } catch(error){
+        res.status(404).json({message: error.message})
     }
 }
 

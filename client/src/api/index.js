@@ -13,6 +13,8 @@ API.interceptors.request.use((req)=>{
 
 export const fetchDogs = () => API.get(`/dogs`);
 
+export const fetchDogsBySearch = (searchQuery) => API.get(`/dogs/fetch?searchQuery=${searchQuery.search||'none'}&tags=${searchQuery.breeds}`);
+
 export const createDog = (newDog) => API.post('/dogs', newDog );
 export const updateDog = ( id, updatedDog ) => API.patch(`/dogs/${id}`, updatedDog);
 export const deleteDog = (id) =>API.delete(`/dogs/${id}`);
