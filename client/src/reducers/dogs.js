@@ -5,9 +5,7 @@ const reducers = (state = { isLoading: true, dogs: []}, action )=> {
         case FETCH_ALL:
             return {
                 ...state,
-                dogs: action.payload.data,
-                currentPage: action.payload.currentPage,
-                numberOfPages: action.payload.numberOfPages
+                dogs: action.payload.data
              }   
         case CREATE:
             return {...state, dogs: [...state, action.payload]};
