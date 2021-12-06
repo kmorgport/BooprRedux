@@ -15,7 +15,7 @@ const Dog = ({dog, setCurrentId})=>{
     const user = JSON.parse(localStorage.getItem('profile'));
     const [boops, setBoops] = useState(dog?.boops);
     const dispatch = useDispatch();
-    const navigate = useNavigate;
+    const navigate = useNavigate();
     const classes = useStyles();
 
     const userId = user?.result.googleId || user?.result?._id;
@@ -46,7 +46,7 @@ const Dog = ({dog, setCurrentId})=>{
       };
 
     const openPost = ()=>{
-        
+        navigate(`/dogs/${dog._id}`)
     }
     
     return (
