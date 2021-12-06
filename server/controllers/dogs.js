@@ -17,7 +17,7 @@ export const getDog = async(req, res) =>{
 
     try{
         const dog = await DogModel.findById(id);
-        res.status(200).json(post);
+        res.status(200).json(dog);
     }catch(error){
         res.status(404).json({message: error.message})
     }

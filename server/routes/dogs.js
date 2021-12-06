@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/fetch',auth, fetchDogsBySearch)
 router.get('/', auth, getDogs);
-router.get('/:id', getDog)
+router.get('/:id',auth, getDog)
 
 
 router.post('/', auth, postDog);

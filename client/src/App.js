@@ -24,8 +24,9 @@ const App = ()=>{
 
     return (
         <BrowserRouter>
+            <Navbar/>
             <Container maxwidth="lg">
-                <Navbar/>
+                
                 <Routes>
                     <Route path="/dogs" element={
                         <RequireAuth redirectTo="/auth">
