@@ -11,7 +11,9 @@ API.interceptors.request.use((req)=>{
     return req;
 })
 
+
 export const fetchDogs = () => API.get(`/dogs`);
+export const fetchDog = (id) => API.get(`/dogs/${id}`)
 
 export const fetchDogsBySearch = (searchQuery) => API.get(`/dogs/fetch?searchQuery=${searchQuery.search||'none'}&tags=${searchQuery.breeds}`);
 

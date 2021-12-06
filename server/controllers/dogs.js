@@ -12,6 +12,19 @@ export const getDogs = async (req, res) => {
     }
 }
 
+export const getDog = async(req, res) =>{
+    const { id } = req.params;
+
+    try{
+        const dog = await DogModel.findById(id);
+        res.status(200).json(post);
+    }catch(error){
+        res.status(404).json({message: error.message})
+    }
+
+
+}
+
 export const fetchDogsBySearch = async(req, res, next)=>{
     const { searchQuery, breeds } = req.query 
     

@@ -1,4 +1,4 @@
-import { FETCH_ALL,CREATE, BOOP, DELETE, START_LOADING, END_LOADING } from '../constants/actionTypes';
+import { FETCH_ALL,CREATE, BOOP, DELETE, START_LOADING, END_LOADING, FETCH_DOG } from '../constants/actionTypes';
 
 const reducers = (state = { isLoading: true, dogs: []}, action )=> {
     switch(action.type){
@@ -7,6 +7,8 @@ const reducers = (state = { isLoading: true, dogs: []}, action )=> {
                 ...state,
                 dogs: action.payload.data
              }   
+        case FETCH_DOG:
+            return {...state, dog: action.payload.dog}
         case CREATE:
             return {...state, dogs: [...state, action.payload]};
         case BOOP:

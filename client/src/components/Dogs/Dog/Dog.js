@@ -46,7 +46,7 @@ const Dog = ({dog, setCurrentId})=>{
       };
 
     const openPost = ()=>{
-
+        
     }
     
     return (
