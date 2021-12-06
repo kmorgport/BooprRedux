@@ -3,6 +3,7 @@ import { AppBar, Typography, Toolbar, Button, Avatar} from '@material-ui/core'
 import useStyles from './styles';
 import {Link, useNavigate, useLocation} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import memoriesLogo from '../../img/Logo.png';
 
 const Navbar = ()=>{
     const location = useLocation();
@@ -32,20 +33,18 @@ const Navbar = ()=>{
     return (
         <AppBar className={classes.appBar} position="static" color="inherit">
             <div className={classes.brandContainer}>
-                <img height="45px"/>
+            <img className={classes.image} src={memoriesLogo} align="center" alt="icon" height="40px" />
                 <img height="40"/>
-                <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Boopr</Typography>
+                {/* <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Boopr</Typography> */}
                 {/* <img className={classes.image} src={memories} alt="icon" height="60"/> */}
             </div>
             <Toolbar className={classes.toolbar}></Toolbar>
-            {user ? (
+            {user && (
                 <div classes={classes.profile}>
                     <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
                     <Typography className={classes.userName} variant="h6">{user.result.name}</Typography>
                     <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Logout</Button>
                 </div>
-            ) : (
-                <Button component={Link} to="/auth" variant="contained" color="primary"></Button>
             )}
         </AppBar>
 )

@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
   appBar: {
     marginTop: 0,
     backgroundColor: '#f5c345',
-    borderRadius: 15,
+    // borderRadius: 15,
     margin: '30px 0',
     display: 'flex',
     flexDirection: 'row',
@@ -18,12 +18,14 @@ export default makeStyles((theme) => ({
     textDecoration: 'none',
   },
   image: {
+    justifyContent: 'center',
+    alignItems: 'center',
     marginLeft: '15px',
   },
   toolbar: {
     display: 'flex',
     justifyContent: 'flex-end',
-    width: '400px',
+    width: '200px',
   },
   profile: {
     display: 'flex',
