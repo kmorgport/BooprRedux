@@ -42,13 +42,14 @@ export const fetchDogsBySearch = async(req, res, next)=>{
 }
 
 export const fetchDogsByOwner = async( req, res, next )=>{
-    const { ownerId } = req.params;
+    const { id } = req.params;
+  
 
     try{
         const dogs = await DogModel.find({
-            owner: ownerId
+            owner: {$in: id}
         })
-
+        console.log(dogs)
         res.json({data: dogs})
 
     }catch(error){
