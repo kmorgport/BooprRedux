@@ -2,27 +2,33 @@ import React, {useState} from 'react';
 import Filebase from 'react-file-base64'
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import useStyles from './styles';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux'
 import { createDog } from '../../actions/dogs'
 
 const Form = () => {
-    
+    const navigate = useNavigate()
+    const user = JSON.parse(localStorage.getItem('profile'));
+    const owner = user.result._id || user.result.googleId
     const dispatch = useDispatch();
     const [dogData, setDogData] = useState({
         name: "",
         bio: "",
         breeds: "",
         picture: "",
-        sex: ""
+        sex: "",
+        owner: owner
     })
-
-    const user = JSON.parse(localStorage.getItem('profile'));
     
     const classes = useStyles();
     const handleSubmit = (e)=>{
         e.preventDefault();
+        setDogData({
+            ...dogData,
+            owner:owner
+        })
         dispatch(createDog(dogData))
-        console.log(dogData)
+        navigate('/')
     }
 
     const onChangeNameHandler = e =>{

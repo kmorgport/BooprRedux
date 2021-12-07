@@ -6,7 +6,6 @@ import { CircularProgress, Grid } from "@material-ui/core"
 
 const Dogs = ({ setCurrentId })=>{
     const {dogs, isLoading}= useSelector(state=> state.dogs);
-    console.log(dogs)
     const classes = useStyles();
     if(!dogs.length && !isLoading) return "No Posts"
     return(
