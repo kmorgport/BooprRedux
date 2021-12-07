@@ -26,7 +26,7 @@ export const getDog = async(req, res) =>{
 }
 
 export const fetchDogsBySearch = async(req, res, next)=>{
-    const { searchQuery, breeds } = req.query 
+    const { searchQuery, breeds } = req.query;
     
     try{
         const dog = new RegExp(searchQuery, 'i');
@@ -38,6 +38,21 @@ export const fetchDogsBySearch = async(req, res, next)=>{
 
     } catch(error){
         res.status(404).json({message: error.message})
+    }
+}
+
+export const fetchDogsByOwner = async( req, res, next )=>{
+    const { ownerId } = req.params;
+
+    try{
+        const dogs = await DogModel.find({
+            owner: ownerId
+        })
+
+        res.json({data: dogs})
+
+    }catch(error){
+        es.status(404).json({message: error.message})
     }
 }
 

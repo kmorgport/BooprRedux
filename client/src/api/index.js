@@ -16,6 +16,7 @@ export const fetchDogs = () => API.get(`/dogs`);
 export const fetchDog = (id) => API.get(`/dogs/${id}`)
 
 export const fetchDogsBySearch = (searchQuery) => API.get(`/dogs/fetch?searchQuery=${searchQuery.search||'none'}&tags=${searchQuery.breeds}`);
+export const fetchDogsByOwner = (id) => API.get(`/dogs/owner/${id}`)
 
 export const createDog = (newDog) => API.post('/dogs', newDog );
 export const updateDog = ( id, updatedDog ) => API.patch(`/dogs/${id}`, updatedDog);

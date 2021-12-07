@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Container, Grow, Grid, AppBar, TextField, Button} from '@material-ui/core';
 import useStyles from './styles';
 import ChipInput from 'material-ui-chip-input';
-import { fetchDogs, getDogsBySearch } from '../../actions/dogs'
+import { fetchDogsByOwner, getDogsBySearch } from '../../actions/dogs'
 import { useDispatch } from 'react-redux';
 import Dogs from '../Dogs/Dogs';
 import Form from '../Form/Form';
 import { useLocation } from 'react-router';
+import { useParams, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 function useQuery(){
@@ -23,9 +24,10 @@ const Home = () =>{
     const searchQuery = query.get('searchQuery')
     const [ search, setSearch ] = useState('');
     const [breeds, setBreeds ] = useState([]);
+    const { id } = useParams();
 
     useEffect(()=>{
-        dispatch(fetchDogs());
+        dispatch(fetchDogsByOwner(id));
     },[currentId])
 
     const handleKeyPress = (e)=>{

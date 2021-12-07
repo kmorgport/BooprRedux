@@ -38,6 +38,19 @@ export const createDog = (newDog) => async (dispatch) => {
 
 }
 
+export const fetchDogsByOwner = (id) => async (dispatch) =>{
+
+    try{
+        dispatch({type:START_LOADING});
+        const { data:{data} } = await api.fetchDogsByOwner(id);
+        dispatch({ type: FETCH_ALL, payload: {data}})
+        dispatch({type: END_LOADING });
+
+    }catch(error){
+        console.log(error)
+    }
+}
+
 export const getDogsBySearch = (searchQuery)=> async (dispatch)=> {
     try{
         dispatch({ type: START_LOADING})
