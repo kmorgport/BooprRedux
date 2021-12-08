@@ -11,12 +11,12 @@ const Form = () => {
     const user = JSON.parse(localStorage.getItem('profile'));
     const owner = user.result._id || user.result.googleId
     const dispatch = useDispatch();
-    const [photos, setPhotos ] = useState([])
+    // const [pictures, setPictures ] = useState([])
     const [dogData, setDogData] = useState({
         name: "",
         bio: "",
         breeds: "",
-        picture: [],
+        pictures: "",
         sex: "",
         owner: owner
     })
@@ -29,6 +29,7 @@ const Form = () => {
             owner:owner
         })
         dispatch(createDog(dogData))
+        console.log(dogData)
         navigate('/')
     }
 
@@ -61,13 +62,13 @@ const Form = () => {
         })
     }
 
-    const onDonePhotoHandler = (base64)=>{
-        setPhotos(oldArray => [...oldArray, base64])
-        setDogData({
-            ...dogData,
-            photos: photos
-        })
-    }
+    // const onDonePhotoHandler = (base64)=>{
+    //     setPictures(oldArray => [...oldArray, base64])
+    //     setDogData({
+    //         ...dogData,
+    //         pictures: pictures
+    //     })
+    // }
 
 
     return (
@@ -89,7 +90,7 @@ const Form = () => {
                     <Filebase
                     type="file"
                     multiple={false}
-                    onDone={onDonePhotoHandler}
+                    onDone={({ base64 }) => setDogData({ ...dogData, pictures: base64 })}
                     />
                 </div>
                 <Button 
