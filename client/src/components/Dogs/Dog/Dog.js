@@ -43,7 +43,7 @@ const Dog = ({dog, setCurrentId})=>{
         }
     
         return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
-      };
+    };
 
     const openPost = ()=>{
         navigate(`/dogs/${dog._id}`)

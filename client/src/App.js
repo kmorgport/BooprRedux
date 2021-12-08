@@ -1,7 +1,8 @@
 import React from 'react';
 import { Container} from '@material-ui/core';
 import Home from './components/Home/Home';
-import User from './components/User/User';
+import BooprUser from './components/User/BooprUser';
+// import User from './components/User/User';
 import Navbar from './components/Navbar/Navbar';
 import PostDetails from './components/PostDetails/PostDetails.js'
 import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
@@ -46,7 +47,7 @@ const App = ()=>{
                         }/>
                     <Route path="/user/:id" element={
                         <RequireAuth redirectTo="/auth">
-                            <User/>
+                            <BooprUser/>
                         </RequireAuth>
                         }/>
                     <Route path="*" element={<Navigate replace to="/dogs"/>}/>

@@ -53,7 +53,7 @@ return (
                 </Typography>
                 <Typography variant="body1">{moment(dog.createdAt).fromNow()}</Typography>
                 <Divider style={{ margin: '20px 0'}} />
-                <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
+                <Typography variant="body1"><strong>{dog.sex}</strong></Typography>
                 <Divider style={{ margin: '20px 0'}}/>
                 <Typography>Map Goes Here?</Typography>
                 <Divider/>

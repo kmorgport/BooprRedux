@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Filebase from 'react-file-base64'
-import { TextField, Button, Typography, Paper } from '@material-ui/core';
+import { TextField, Button, Typography, Paper, FormControl, Radio, RadioGroup, FormControlLabel, FormLabel } from '@material-ui/core';
 import useStyles from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux'
@@ -11,11 +11,12 @@ const Form = () => {
     const user = JSON.parse(localStorage.getItem('profile'));
     const owner = user.result._id || user.result.googleId
     const dispatch = useDispatch();
+    const [photos, setPhotos ] = useState([])
     const [dogData, setDogData] = useState({
         name: "",
         bio: "",
         breeds: "",
-        picture: "",
+        picture: [],
         sex: "",
         owner: owner
     })
@@ -53,13 +54,18 @@ const Form = () => {
     }
 
     const onChangeSexHandler = (e)=>{
-        let sex;
-        
-        e.target.value.toLowerCase()==="m"? sex=true : sex=false;
 
         setDogData({
             ...dogData,
-            sex
+            sex: e.target.value
+        })
+    }
+
+    const onDonePhotoHandler = (base64)=>{
+        setPhotos(oldArray => [...oldArray, base64])
+        setDogData({
+            ...dogData,
+            photos: photos
         })
     }
 
@@ -71,12 +77,19 @@ const Form = () => {
                 <TextField name="name" variant="outlined" label="Name" fullWidth value={dogData.name} onChange={onChangeNameHandler}/>
                 <TextField name="breeds" variant="outlined" label="Breeds" fullWidth value={dogData.breeds} onChange={onChangeBreedsHandler}/>
                 <TextField name="bio" variant="outlined" label="Bio" fullWidth value={dogData.bio} onChange={onChangeBioHandler}/>
-                <TextField name="sex" variant="outlined" label="Sex" fullWidth value={dogData.sex} onChange={onChangeSexHandler}/>
+                {/* <TextField name="sex" variant="outlined" label="Sex" fullWidth value={dogData.sex} onChange={onChangeSexHandler}/> */}
+                <FormControl component="fieldset">
+                    <FormLabel component="legend">Sex</FormLabel>
+                    <RadioGroup row aria-label="sex" name="sex" value={dogData.sex} onChange={onChangeSexHandler}>
+                        <FormControlLabel value="female" control={<Radio/>} label="Female"/>
+                        <FormControlLabel value="male" control={<Radio/>} label="Male"/>
+                    </RadioGroup>
+                </FormControl>
                 <div className={classes.fileInput}>
                     <Filebase
                     type="file"
                     multiple={false}
-                    onDone={(base64)=> setDogData({...dogData, picture:base64})}
+                    onDone={onDonePhotoHandler}
                     />
                 </div>
                 <Button 
