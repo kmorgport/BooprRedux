@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Filebase from 'react-file-base64'
-import { TextField, Button, Typography, Paper, FormControl, Radio, RadioGroup, FormControlLabel, FormLabel } from '@material-ui/core';
+import { TextField, Button, Typography, Paper, FormControl, Radio, RadioGroup, FormControlLabel, FormLabel, OutlinedInput, InputLabel,MenuItem, Select } from '@material-ui/core';
 import useStyles from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux'
 import { createDog } from '../../actions/dogs'
-import BreedOptions from './BreedOptions';
 
 const Form = () => {
+    const [breedName, setBreedName] = useState([]);
     const navigate = useNavigate()
     const {breeds}= useSelector(state=> state.breeds);
     const user = JSON.parse(localStorage.getItem('profile'));
@@ -17,21 +17,17 @@ const Form = () => {
     const [dogData, setDogData] = useState({
         name: "",
         bio: "",
-        breeds: "",
         pictures: "",
         sex: "",
         owner: owner
     })
+
     
     const classes = useStyles();
     const handleSubmit = (e)=>{
         e.preventDefault();
-        setDogData({
-            ...dogData,
-            owner:owner
-        })
-        dispatch(createDog(dogData))
         console.log(dogData)
+        dispatch(createDog(dogData))
         navigate('/')
     }
 
@@ -42,12 +38,12 @@ const Form = () => {
         })
     }
 
-    const onChangeBreedsHandler = (e)=>{
-        setDogData({
-            ...dogData,
-            breeds: e.target.value
-        })
-    }
+    // const onChangeBreedsHandler = (e)=>{
+    //     setDogData({
+    //         ...dogData,
+    //         breeds: e.target.value
+    //     })
+    // }
 
     const onChangeBioHandler = (e)=>{
         setDogData({
@@ -61,6 +57,24 @@ const Form = () => {
         setDogData({
             ...dogData,
             sex: e.target.value
+        })
+    }
+
+    const onChangeBreedsHandler = (e)=>{
+        // const {
+        //     target: {value},
+        // } = e;
+        // console.log(value)
+        setBreedName(
+            typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value,
+        );
+
+    };
+
+    const setBreedsHandler = ()=>{
+        setDogData({
+            ...dogData,
+            breeds: [...breedName]
         })
     }
 
@@ -78,10 +92,29 @@ const Form = () => {
             <form autoComplete="off" noValidate className={classes.form} onSubmit={handleSubmit}>
             <Typography variant="h6">a Pupper</Typography>
                 <TextField name="name" variant="outlined" label="Name" fullWidth value={dogData.name} onChange={onChangeNameHandler}/>
-                <TextField name="breeds" variant="outlined" label="Breeds" fullWidth value={dogData.breeds} onChange={onChangeBreedsHandler}/>
-                <BreedOptions breeds={breeds}/>
+                {/* <TextField name="breeds" variant="outlined" label="Breeds" fullWidth value={dogData.breeds} onChange={onChangeBreedsHandler}/> */}
+                    <FormControl fullWidth sx={{m:1, width: 300}}>
+                        <InputLabel id="multiple-name-label">Breed</InputLabel>
+                        <Select
+                            labelId= "multiple-breed-label"
+                            id="multiple-breeds"
+                            multiple
+                            value={breedName}
+                            onChange={onChangeBreedsHandler}
+                            onBlur={setBreedsHandler}
+                            input={<OutlinedInput label="Breed"/>}
+                        >
+                            {breeds.map((breed)=>(
+                                <MenuItem
+                                    key={breed._id}
+                                    value={breed.breed}
+                                >
+                                    {breed.breed}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
                 <TextField name="bio" variant="outlined" label="Bio" fullWidth value={dogData.bio} onChange={onChangeBioHandler}/>
-                {/* <TextField name="sex" variant="outlined" label="Sex" fullWidth value={dogData.sex} onChange={onChangeSexHandler}/> */}
                 <FormControl component="fieldset">
                     <FormLabel component="legend">Sex</FormLabel>
                     <RadioGroup row aria-label="sex" name="sex" value={dogData.sex} onChange={onChangeSexHandler}>

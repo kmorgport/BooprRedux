@@ -28,7 +28,7 @@ const Home = () =>{
     useEffect(()=>{
         dispatch(fetchDogs());
         dispatch(fetchBreeds());
-    },[currentId])
+    },[navigate])
 
     const handleKeyPress = (e)=>{
         if(e.keyCode === 13){

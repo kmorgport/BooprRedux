@@ -16,7 +16,7 @@ const BreedOptions = ({breeds}) => {
     return (
         <div>
             <FormControl sx={{m:1, width: 300}}>
-                <InputLabel id="multiple-name-label">"Name"</InputLabel>
+                <InputLabel id="multiple-name-label">Breed</InputLabel>
                 <Select
                     labelId= "multiple-breed-label"
                     id="multiple-breeds"
@@ -27,10 +27,10 @@ const BreedOptions = ({breeds}) => {
                 >
                     {breeds.map((breed)=>(
                         <MenuItem
-                            key={breed}
-                            value={breed}
+                            key={breed._id}
+                            value={breed.breed}
                         >
-                            {breed}
+                            {breed.breed}
                         </MenuItem>
                     ))}
                 </Select>
