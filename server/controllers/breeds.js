@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import BreedModel from '../models/breedModel';
+import BreedModel from '../models/breedModel.js';
 
 export const getBreeds = async (req, res)=>{
     try{
