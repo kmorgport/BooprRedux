@@ -13,3 +13,5 @@ export const LOGOUT = "LOGOUT";
 
 export const BOOP = "BOOP";
 export const COMMENT = "COMMENT"
+
+export const FETCH_BREEDS = "FETCH_BREEDS";

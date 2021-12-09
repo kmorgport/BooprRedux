@@ -23,6 +23,8 @@ export const updateDog = ( id, updatedDog ) => API.patch(`/dogs/${id}`, updatedD
 export const deleteDog = (id) =>API.delete(`/dogs/${id}`);
 export const boopDog = (id) => API.patch(`/dogs/${id}/boopDog`)
 
+export const fetchBreeds = () => API.get(`/breeds`);
+
 
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);

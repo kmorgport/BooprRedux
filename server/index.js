@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import userRoutes from './routes/user.js'
 import dogRoutes from './routes/dogs.js'
+import breedRoutes from './routes/breeds.js'
 
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use('/dogs', dogRoutes);
 app.use('/user', userRoutes);
+app.use('/breeds', breedRoutes)
 
 const CONNECTION_URL = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.r7gfx.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`
 const PORT = process.env.PORT || 5000;
