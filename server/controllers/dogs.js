@@ -59,10 +59,8 @@ export const fetchDogsByOwner = async( req, res, next )=>{
 
 export const postDog = async (req, res) => {
     const dog = req.body;
-    console.log(dog)
 
     const newDog = new DogModel(dog);
-    console.log(dog)
 
     try{
 

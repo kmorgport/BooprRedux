@@ -4,7 +4,7 @@ import { TextField, Button, Typography, Paper, FormControl, Radio, RadioGroup, F
 import useStyles from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux'
-import { createDog } from '../../actions/dogs'
+import { createDog, fetchDogs } from '../../actions/dogs'
 
 const Form = () => {
     const [breedName, setBreedName] = useState([]);
@@ -14,6 +14,7 @@ const Form = () => {
     const owner = user.result._id || user.result.googleId
     const dispatch = useDispatch();
     // const [pictures, setPictures ] = useState([])
+
     const [dogData, setDogData] = useState({
         name: "",
         bio: "",
@@ -24,12 +25,16 @@ const Form = () => {
 
     
     const classes = useStyles();
+
     const handleSubmit = (e)=>{
         e.preventDefault();
-        console.log(dogData)
         dispatch(createDog(dogData))
         navigate('/')
     }
+
+    useEffect(()=>{
+        dispatch(fetchDogs())
+    },[navigate])
 
     const onChangeNameHandler = e =>{
         setDogData({
