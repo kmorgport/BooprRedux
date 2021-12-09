@@ -5,9 +5,11 @@ import useStyles from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux'
 import { createDog } from '../../actions/dogs'
+import BreedOptions from './BreedOptions';
 
 const Form = () => {
     const navigate = useNavigate()
+    const {breeds}= useSelector(state=> state.breeds);
     const user = JSON.parse(localStorage.getItem('profile'));
     const owner = user.result._id || user.result.googleId
     const dispatch = useDispatch();
@@ -77,6 +79,7 @@ const Form = () => {
             <Typography variant="h6">a Pupper</Typography>
                 <TextField name="name" variant="outlined" label="Name" fullWidth value={dogData.name} onChange={onChangeNameHandler}/>
                 <TextField name="breeds" variant="outlined" label="Breeds" fullWidth value={dogData.breeds} onChange={onChangeBreedsHandler}/>
+                <BreedOptions breeds={breeds}/>
                 <TextField name="bio" variant="outlined" label="Bio" fullWidth value={dogData.bio} onChange={onChangeBioHandler}/>
                 {/* <TextField name="sex" variant="outlined" label="Sex" fullWidth value={dogData.sex} onChange={onChangeSexHandler}/> */}
                 <FormControl component="fieldset">

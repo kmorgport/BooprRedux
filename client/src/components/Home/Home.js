@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Container, Grow, Grid, AppBar, TextField, Button} from '@material-ui/core';
 import useStyles from './styles';
 import ChipInput from 'material-ui-chip-input';
-import { fetchDogs, getDogsBySearch } from '../../actions/dogs'
+import { fetchDogs, getDogsBySearch} from '../../actions/dogs'
+import { fetchBreeds } from '../../actions/breeds';
 import { useDispatch } from 'react-redux';
 import Dogs from '../Dogs/Dogs';
 import Form from '../Form/Form';
@@ -26,6 +27,7 @@ const Home = () =>{
 
     useEffect(()=>{
         dispatch(fetchDogs());
+        dispatch(fetchBreeds());
     },[currentId])
 
     const handleKeyPress = (e)=>{
