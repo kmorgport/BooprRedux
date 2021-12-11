@@ -1,14 +1,16 @@
 import React, {useEffect} from 'react';
-import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core/';
+import { Paper, Typography, CircularProgress, Divider, Button } from '@material-ui/core/';
 import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link} from 'react-router-dom';
 
 import { fetchDog } from '../../actions/dogs'
 
 import useStyles  from './styles';
 
 const Dog = ()=>{
+    const user = JSON.parse(localStorage.getItem('profile'));
+    const userId = user?.result.googleId || user?.result?._id;
     const { dog, isLoading } = useSelector((state)=> state.dogs);
     const dispatch = useDispatch();
     // const navigate = useNavigate();
@@ -22,8 +24,6 @@ const Dog = ()=>{
     if( !dog ) return null
 
 
-
-// const openPost = (_id) => navigate(`/dogs/${_id}`);
 
 if(isLoading){
     return(
@@ -56,10 +56,16 @@ return (
                 <Typography variant="body1"><strong>{dog.sex}</strong></Typography>
                 <Divider style={{ margin: '20px 0'}}/>
                 <Typography>Map Goes Here?</Typography>
+                {dog.owner === userId && (
+                    <>
+                    <Divider style={{ margin: '20px 0'}}/>
+                    <Button component={Link} to={`/update/${dog._id}`}>Update Dog</Button>
+                    </>
+                )}
                 <Divider/>
             </div>
             <div className={classes.imageSection}>
-                <Typography>Images go here</Typography>
+                <img className={classes.media} src={dog.pictures[0] || ""}/>
             </div>
         </div>
     </Paper>

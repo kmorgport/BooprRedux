@@ -41,6 +41,8 @@ const App = ()=>{
                             <PostDetails/>
                         </RequireAuth>
                         }/>
+                        {/* <Route path="/dogs/:id/update" element={<Update/>}/>
+                    </Route> */}
                     <Route path="/auth" element={
                         <BlockAuth redirectTo="/dogs">
                             <Auth/>
@@ -50,9 +52,12 @@ const App = ()=>{
                         <RequireAuth redirectTo="/auth">
                             <BooprUser/>
                         </RequireAuth>
-                        }>
-                        <Route path="/update/:dogId" element={<Update/>}/>
-                    </Route>
+                        }/>
+                    <Route path="/update/:id" element={
+                        <RequireAuth redirectTo="/auth">
+                            <Update/>
+                        </RequireAuth>
+                        }/>
                     <Route path="*" element={<Navigate replace to="/dogs"/>}/>
                 </Routes>
             </Container>
