@@ -1,4 +1,4 @@
-import { FETCH_ALL, FETCH_DOG, CREATE, BOOP, DELETE, START_LOADING, END_LOADING, FETCH_BY_SEARCH} from '../constants/actionTypes';
+import { FETCH_ALL, FETCH_DOG, CREATE, UPDATE, BOOP, DELETE, START_LOADING, END_LOADING, FETCH_BY_SEARCH} from '../constants/actionTypes';
 import * as api from '../api';
 
 export const fetchDogs = () => async (dispatch) =>{
@@ -86,6 +86,17 @@ export const deleteDog = (id) => async (dispatch) =>{
 
         dispatch({type: DELETE, payload: id})
     }catch(error){
+        console.log(error)
+    }
+}
+
+export const updateDog = (id, dog) => async (dispatch) => {
+    try{
+        const { data } = await api.updateDog(id, dog);
+
+        dispatch({ type: UPDATE, payload: data})
+
+    }catch (error){
         console.log(error)
     }
 }

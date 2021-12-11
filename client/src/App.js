@@ -7,6 +7,7 @@ import Navbar from './components/Navbar/Navbar';
 import PostDetails from './components/PostDetails/PostDetails.js'
 import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import Auth from './components/Auth/Auth';
+import Update from './components/Update/Update';
 
 
 
@@ -49,7 +50,9 @@ const App = ()=>{
                         <RequireAuth redirectTo="/auth">
                             <BooprUser/>
                         </RequireAuth>
-                        }/>
+                        }>
+                        <Route path="/update/:dogId" element={<Update/>}/>
+                    </Route>
                     <Route path="*" element={<Navigate replace to="/dogs"/>}/>
                 </Routes>
             </Container>

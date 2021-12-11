@@ -1,4 +1,4 @@
-import { FETCH_ALL,CREATE, BOOP, DELETE, START_LOADING, END_LOADING, FETCH_DOG } from '../constants/actionTypes';
+import { FETCH_ALL,CREATE, BOOP, UPDATE, DELETE, START_LOADING, END_LOADING, FETCH_DOG } from '../constants/actionTypes';
 
 const reducers = (state = { isLoading: true, dogs: []}, action )=> {
     switch(action.type){
@@ -15,6 +15,8 @@ const reducers = (state = { isLoading: true, dogs: []}, action )=> {
             return {...state, dogs: state.dogs.map((dog)=>(dog._id === action.payload._id ? action.payload: dog))};
         case DELETE:
             return {...state, dogs: state.dogs.filter(dog => dog._id !== action.payload)};
+        case UPDATE:
+            return {...state, dogs: state.dogs.map((dog)=> (dog._id === action.payload._id ? action.payload: dog)) };
         case START_LOADING:
             return { ...state, isLoading: true }
         case END_LOADING:
