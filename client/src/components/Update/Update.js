@@ -1,33 +1,97 @@
-import React from 'react';
-import { Container, Grow, Grid, AppBar, TextField, Button, Typography} from '@material-ui/core';
+import React, {useState, useEffect } from 'react';
+import { Paper, CircularProgress, Grid, AppBar, TextField, Button, Typography, FormControl, InputLabel, Select, OutlinedInput, MenuItem, FormLabel, RadioGroup,FormControlLabel, Radio, } from '@material-ui/core';
 import useStyles from './styles';
+import { useParams, useNavigate } from 'react-router-dom';
 import Filebase from 'react-file-base64'
+import {useSelector, useDispatch } from 'react-redux'
+import { fetchDog } from '../../actions/dogs'
 import image from '../../img/Logo.png'
 
 const Update = ()=>{
+    const [breedName, setBreedName ] = useState([]);
+    const { breeds } = useSelector(state=> state.breeds)
+    const { dog, isLoading } = useSelector((state)=> state.dogs);
+    const user = JSON.parse(localStorage.getItem('profile'));
+    const owner = user.result._id || user.result.googleId
     const classes = useStyles();
+    const navigate = useNavigate()
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    const [dogData, setDogData] = useState({
+        name: "",
+        bio: "",
+        pictures: "",
+        sex: "",
+    })
+    
+    useEffect(()=>{
+        if(!dog){
+            dispatch(fetchDog(id));
+        }
+        setDogData({
+            name: dog?.name,
+            bio: dog?.bio,
+            pictures: dog?.pictures[0],
+            sex: dog?.sex
+        })
+    }, [dog])
+
+
     const handleSubmit = ()=>{
 
     }
+
+    const onChangeBreedsHandler = ()=>{
+
+    }
+
+    const onChangeNameHandler = ()=>{
+        
+    }
+
+    const setBreedsHandler = ()=>{
+
+    }
+
+    const onChangeBioHandler = ()=>{
+
+    }
+
+    const onChangeSexHandler = ()=>{
+
+    }
+
+    if( !dog ) return null
+
+    if(isLoading){
+        return(
+            <Paper elevation={6} className={classes.loadingPaper}>
+                <CircularProgress size="7em"/>
+            </Paper>
+        )
+    }
+
     return (
         <>
         <Grid container alignItems="center" direction="column" justifyContent='center'>
             <Typography variant="h4" margintTop="4">Dog Editor</Typography>
-            <Grid container flexDirection="column" justifyContent='center' m="1" className={classes.borders}>
+            <Grid container alignItems="center" direction="column" flexDirection="column" justifyContent='center' m="1" className={classes.borders}>
                 <Grid xs={12}>
                     <Typography>Photo Edit</Typography>
                 </Grid>
                 <Grid xs={12}>
                 <div className={classes.imageSection}>
-                    <img className={classes.media} src={image}/>
+                    <img className={classes.media} src={dogData.pictures}/>
                 </div>
                 </Grid>
-                <Grid  display="flex" justifyContent="between">
-                        <Grid>
+                <Grid container alignItems="center" justifyContent='center'>
+                        <Grid item>
                             <Filebase
                             type="file"
                             multiple={false}
                             />
+                        </Grid>
+                        <Grid item alignItems="stretch" display="flex">
                             <Button
                             className={classes.buttonSubmit}
                             variant="contained"
@@ -44,6 +108,7 @@ const Update = ()=>{
                 <Grid item alignItems="center">
                     <Typography>Edit Info</Typography>
                     <form autoComplete="off" noValidate className={classes.form} onSubmit={handleSubmit}>
+                        
                         <TextField name="name" variant="outlined" label="Name" fullWidth value={dogData.name} onChange={onChangeNameHandler}/>
                         <FormControl fullWidth sx={{m:1, width: 300}}>
                         <InputLabel id="multiple-name-label">Breed</InputLabel>
@@ -74,6 +139,15 @@ const Update = ()=>{
                             <FormControlLabel value="male" control={<Radio/>} label="Male"/>
                         </RadioGroup>
                     </FormControl>
+                    <Button 
+                        className={classes.buttonSubmit}
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        type="submit"
+                        fullWidth
+                    >Submit
+                    </Button>
                     </form>
                 </Grid>
             </Grid>
