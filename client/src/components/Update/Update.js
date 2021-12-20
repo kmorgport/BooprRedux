@@ -4,7 +4,7 @@ import useStyles from './styles';
 import { useParams, useNavigate } from 'react-router-dom';
 import Filebase from 'react-file-base64'
 import {useSelector, useDispatch } from 'react-redux'
-import { fetchDog } from '../../actions/dogs'
+import { fetchDog, updateDog } from '../../actions/dogs'
 import image from '../../img/Logo.png'
 
 const Update = ()=>{
@@ -37,8 +37,14 @@ const Update = ()=>{
     }, [dog])
 
 
-    const handleSubmit = ()=>{
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        dispatch(updateDog(dogData))
+        navigate('/')
+    }
 
+    const handlePicUpdate =(e)=>{
+        e.preventDefault()
     }
 
     const onChangeBreedsHandler = (e)=>{
@@ -47,12 +53,18 @@ const Update = ()=>{
         );
     }
 
-    const onChangeNameHandler = ()=>{
-        
+    const onChangeNameHandler = (e)=>{
+        setDogData({
+            ...dogData,
+            name: e.target.value
+        })
     }
 
     const setBreedsHandler = ()=>{
-
+        setDogData({
+            ...dogData,
+            breeds: [...breedName]
+        })
     }
 
     const onChangeBioHandler = (e)=>{
@@ -107,6 +119,7 @@ const Update = ()=>{
                             size="large"
                             type="submit"
                             fullWidth
+                            onClick={handlePicUpdate}
                             >Upload Image
                         </Button>
                         </Grid>
