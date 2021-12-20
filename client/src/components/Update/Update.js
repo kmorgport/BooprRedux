@@ -41,8 +41,10 @@ const Update = ()=>{
 
     }
 
-    const onChangeBreedsHandler = ()=>{
-
+    const onChangeBreedsHandler = (e)=>{
+        setBreedName(
+            typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value,
+        );
     }
 
     const onChangeNameHandler = ()=>{
@@ -53,12 +55,18 @@ const Update = ()=>{
 
     }
 
-    const onChangeBioHandler = ()=>{
-
+    const onChangeBioHandler = (e)=>{
+        setDogData({
+            ...dogData,
+            bio: e.target.value
+        })
     }
 
-    const onChangeSexHandler = ()=>{
-
+    const onChangeSexHandler = (e)=>{
+        setDogData({
+            ...dogData,
+            sex: e.target.value
+        })
     }
 
     if( !dog ) return null
