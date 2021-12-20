@@ -4,13 +4,15 @@ import useStyles from './styles';
 import { useParams, useNavigate } from 'react-router-dom';
 import Filebase from 'react-file-base64'
 import {useSelector, useDispatch } from 'react-redux'
-import { fetchDog, updateDog } from '../../actions/dogs'
+import { fetchDog, updateDog,} from '../../actions/dogs'
+import { fetchBreeds } from '../../actions/breeds';
 import image from '../../img/Logo.png'
 
 const Update = ()=>{
-    const [breedName, setBreedName ] = useState([]);
     const { breeds } = useSelector(state=> state.breeds)
     const { dog, isLoading } = useSelector((state)=> state.dogs);
+    const [breedName, setBreedName ] = useState([]);
+    console.log(dog?.breeds)
     const user = JSON.parse(localStorage.getItem('profile'));
     const owner = user.result._id || user.result.googleId
     const classes = useStyles();
@@ -25,6 +27,7 @@ const Update = ()=>{
     })
     
     useEffect(()=>{
+        dispatch(fetchBreeds());
         if(!dog){
             dispatch(fetchDog(id));
         }
@@ -34,6 +37,7 @@ const Update = ()=>{
             pictures: dog?.pictures[0],
             sex: dog?.sex
         })
+        setBreedName(prevData=>[...prevData,dog?.breeds])
     }, [dog])
 
 
