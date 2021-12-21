@@ -12,7 +12,6 @@ const Update = ()=>{
     const { breeds } = useSelector(state=> state.breeds)
     const { dog, isLoading } = useSelector((state)=> state.dogs);
     const [breedName, setBreedName ] = useState([]);
-    console.log(dog?.breeds)
     const user = JSON.parse(localStorage.getItem('profile'));
     const owner = user.result._id || user.result.googleId
     const classes = useStyles();
@@ -37,9 +36,8 @@ const Update = ()=>{
             pictures: dog?.pictures[0],
             sex: dog?.sex
         })
-        setBreedName(prevData=>[...prevData,dog?.breeds])
+        setBreedName(dog?.breeds)
     }, [dog])
-
 
     const handleSubmit = (e)=>{
         e.preventDefault();
