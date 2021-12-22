@@ -12,6 +12,7 @@ const Form = () => {
     const {breeds}= useSelector(state=> state.breeds);
     const user = JSON.parse(localStorage.getItem('profile'));
     const owner = user.result._id || user.result.googleId
+    const ownerName = user.result.userName
     const dispatch = useDispatch();
     // const [pictures, setPictures ] = useState([])
 
@@ -20,7 +21,8 @@ const Form = () => {
         bio: "",
         pictures: "",
         sex: "",
-        owner: owner
+        owner: owner,
+        ownerName
     })
 
     
