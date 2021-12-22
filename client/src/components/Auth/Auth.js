@@ -12,6 +12,7 @@ import { signUp, signIn } from '../../actions/auth'
 const initialState = {
     firstName: '',
     lastName: '',
+    userName: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -84,6 +85,7 @@ const Auth = ()=>{
                                 <>
                                     <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half/>
                                     <Input name="lastName" label="Last Name" handleChange={handleChange} half/>
+                                    <Input name="userName" label="Username" handleChange={handleChange}/>
                                 </>
                             )
                         }

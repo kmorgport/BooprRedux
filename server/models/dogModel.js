@@ -6,6 +6,7 @@ const dogSchema = mongoose.Schema({
     bio: String,
     sex: String,
     owner: String,
+    ownerUsername: String,
     pictures: [String],
     breeds:{
         type: [String],

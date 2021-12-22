@@ -15,7 +15,8 @@ export const signIn = async (req, res) => {
 
         const token = jwt.sign({
             email: existingUser.email,
-            id: existingUser._id
+            id: existingUser._id,
+            userName: existingUser.userName
         }, 'test', {expiresIn: '1h'});
 
         res.status(200).json({result: existingUser, token});
@@ -26,11 +27,15 @@ export const signIn = async (req, res) => {
 }
 
 export const signUp = async (req, res ) => {
-    const { email, password, confirmPassword, firstName, lastName } = req.body;
+    const { email, password, confirmPassword, firstName, lastName, userName } = req.body;
 
     try{
         const existingUser = await User.findOne({email});
+        const existingUserName = await User.findOne({userName});
+
         if(existingUser) return res.status(400).json({message: "User already exists!"});
+
+        if(existingUserName) return res.status(400).json({message: "Username already selected!"});
 
         if(password !== confirmPassword) return res.status(400).json({message: "Passwords must match!"});
 
@@ -38,11 +43,13 @@ export const signUp = async (req, res ) => {
         const result = await User.create({
             email,
             password: hashedPassword,
-            name: `${firstName} ${lastName}`
+            name: `${firstName} ${lastName}`,
+            userName
         });
         const token = jwt.sign({
             email: result.email,
-            id: existingUser._id
+            id: result._id,
+            userName: result.userName
         }, "test", {expiresIn: '1h'})
         res.status(200).json({result, token})
         
