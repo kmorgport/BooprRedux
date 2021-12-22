@@ -111,6 +111,7 @@ const Update = ()=>{
                             <Filebase
                             type="file"
                             multiple={false}
+                            onDone={({ base64 }) => setDogData({ ...dogData, pictures: base64 })}
                             />
                         </Grid>
                         <Grid item alignItems="stretch" display="flex">

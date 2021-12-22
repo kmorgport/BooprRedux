@@ -15,3 +15,5 @@ export const BOOP = "BOOP";
 export const COMMENT = "COMMENT"
 
 export const FETCH_BREEDS = "FETCH_BREEDS";
+
+export const ADD_PUP_PIC = "ADD_PUP_PIC";

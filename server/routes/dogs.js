@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getDogs, getDog, postDog, updateDog, deleteDog, boopDog, fetchDogsBySearch, fetchDogsByOwner } from '../controllers/dogs.js';
+import { getDogs, getDog, postDog, updateDog, deleteDog, boopDog, fetchDogsBySearch, fetchDogsByOwner, addDogPic } from '../controllers/dogs.js';
 
 import auth from '../middleware/auth.js';
 
@@ -17,5 +17,7 @@ router.post('/', auth, postDog);
 router.patch('/:id', auth, updateDog);
 router.delete('/:id', auth, deleteDog);
 router.patch('/:id/boopDog', auth, boopDog)
+
+router.patch('/:id/addPupPic', auth, addDogPic)
 
 export default router

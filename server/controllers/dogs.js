@@ -118,3 +118,21 @@ export const boopDog = async (req, res)=>{
 
     res.status(200).json(updatedDog);
 }
+
+export const addDogPic = async (req, res ) => {
+    const { id } = req.params;
+    const { pic } = req.body;
+    if(!req.userId){
+        return res.json({ message: "Unauthenticated"})
+    }
+    
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    const dog = await DogModel.findById(id);
+
+    dog.pictures.push(pic);
+
+    const updatedDog = await DogModel.findByIdAndUpdate(id, dog, { new: true});
+    
+    res.status(200).json(updatedDog);
+}
