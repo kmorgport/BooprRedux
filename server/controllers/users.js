@@ -59,5 +59,23 @@ export const signUp = async (req, res ) => {
 }
 
 export const googleSignIn = (req, res) => {
-    
+    const randomNumbGen = (max, min) =>{
+        return Math.floor(Math.random()*(max - min)+min)
+    }
+    const { email, familyName, givenName } = req.body.profileObj.email;
+    const  id = req.body.googleId;
+    const randomPackGen = parseInt(`${randomNumbGen(10,1)}0${randomNumbGen(10,1)}0${randomNumbGen(10,1)}0${randomNumbGen(10,1)}`)
+    try{
+        const existingUser = await User.findOne({email});
+        if(!existingUser){
+            const result = await User.create({
+                email,
+                id,
+                name: `${givenName} ${familyName}`,
+                userName: `PackLeader_${randomPackGen}`
+            })
+        }
+    }catch( error){
+        console.log(error)
+    }
 }

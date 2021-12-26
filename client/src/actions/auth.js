@@ -26,10 +26,10 @@ export const signUp = (formData, navigate) => async (dispatch) => {
 
 export const googleSignIn = (res) => async (dispatch)=>{
     try{
-        
+
         const { data } = await api.googleSignIn(res);
 
-        dispatch({ type: 'AUTH', data:{result, token}})
+        dispatch({ type: AUTH, data})
 
     }catch (error){
         console.log(error)
