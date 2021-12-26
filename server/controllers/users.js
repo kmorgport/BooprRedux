@@ -59,11 +59,14 @@ export const signUp = async (req, res ) => {
 }
 
 export const googleSignIn = (req, res) => {
+    //create random number
     const randomNumbGen = (max, min) =>{
         return Math.floor(Math.random()*(max - min)+min)
     }
+    //pull googleSignIn info
     const { email, familyName, givenName } = req.body.profileObj.email;
     const  id = req.body.googleId;
+    //creates random number string 
     const randomPackGen = parseInt(`${randomNumbGen(10,1)}0${randomNumbGen(10,1)}0${randomNumbGen(10,1)}0${randomNumbGen(10,1)}`)
     try{
         const existingUser = await User.findOne({email});
@@ -72,6 +75,7 @@ export const googleSignIn = (req, res) => {
                 email,
                 id,
                 name: `${givenName} ${familyName}`,
+                //build placeholder (hopefully non duplicate) packleader UserName
                 userName: `PackLeader_${randomPackGen}`
             })
         }
