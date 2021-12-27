@@ -7,7 +7,7 @@ import Input from './Input'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import { signUp, signIn } from '../../actions/auth'
+import { signUp, signIn, googleSignIn } from '../../actions/auth'
 
 const initialState = {
     firstName: '',
@@ -59,7 +59,7 @@ const Auth = ()=>{
         const token = res?.tokenId;
         console.log(res);
         try{
-
+            dispatch(googleSignIn(res, navigate))
             dispatch({ type: 'AUTH', data:{result, token}})
             navigate('/');
         }catch(err){

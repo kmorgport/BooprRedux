@@ -59,6 +59,8 @@ export const signUp = async (req, res ) => {
 }
 
 export const googleSignIn = async (req, res) => {
+    //need to rectify password necessity if user is signing in with Google Auth
+    console.log(req.body.profileObj)
     //create random number
     const randomNumbGen = (max, min) =>{
         return Math.floor(Math.random()*(max - min)+min)

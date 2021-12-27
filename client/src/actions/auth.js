@@ -1,5 +1,5 @@
 import * as api from '../api';
-import { AUTH } from '../constants/actionTypes';
+import { AUTH, GOOGLE } from '../constants/actionTypes';
 
 export const signIn = (formData, navigate) => async (dispatch) => {
     try{
@@ -24,12 +24,12 @@ export const signUp = (formData, navigate) => async (dispatch) => {
     }
 }
 
-export const googleSignIn = (res) => async (dispatch)=>{
+export const googleSignIn = (res, navigate) => async (dispatch)=>{
     try{
 
         const { data } = await api.googleSignIn(res);
-
-        dispatch({ type: AUTH, data})
+        dispatch({ type: GOOGLE, data})
+        navigate('/')
 
     }catch (error){
         console.log(error)
