@@ -22,7 +22,7 @@ const Form = () => {
         pictures: "",
         sex: "",
         owner: owner,
-        ownerName
+        ownerUserName: ownerName
     })
 
     

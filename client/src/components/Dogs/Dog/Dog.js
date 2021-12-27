@@ -88,7 +88,7 @@ const Dog = ({dog, setCurrentId})=>{
                 <Button size="small" color="primary" disabled={!user?.result} onClick={handleBoop}>
                     <Boops/>
                 </Button>
-                {(user?.result?.googleId === dog?.creator || user?.result?._id === dog?.creator)&&(
+                {(user?.result?.googleId === dog?.owner || user?.result?._id === dog?.owner)&&(
                     <Button size="small" color="secondary" onClick={()=> dispatch(deleteDog(dog._id))}>
                         <DeleteIcon fontSize="small"/>&nbsp; Delete
                     </Button>

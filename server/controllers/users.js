@@ -58,7 +58,7 @@ export const signUp = async (req, res ) => {
     }
 }
 
-export const googleSignIn = (req, res) => {
+export const googleSignIn = async (req, res) => {
     //create random number
     const randomNumbGen = (max, min) =>{
         return Math.floor(Math.random()*(max - min)+min)
@@ -78,7 +78,20 @@ export const googleSignIn = (req, res) => {
                 //build placeholder (hopefully non duplicate) packleader UserName
                 userName: `PackLeader_${randomPackGen}`
             })
+            const token = jwt.sign({
+                email: result.email,
+                id: result._id,
+                userName: result.userName
+            }, "test", {expiresIn: '1h'})
+            res.status(200).json({result, token})
         }
+        const token = jwt.sign({
+            email: existingUser.email,
+            id: existingUser._id,
+            userName: existingUser.userName
+        }, 'test', {expiresIn: '1h'});
+        res.status(200).json({result: existingUser, token});
+
     }catch( error){
         console.log(error)
     }
