@@ -60,22 +60,21 @@ export const signUp = async (req, res ) => {
 
 export const googleSignIn = async (req, res) => {
     //need to rectify password necessity if user is signing in with Google Auth
-    console.log(req.body.profileObj)
     //create random number
     const randomNumbGen = (max, min) =>{
         return Math.floor(Math.random()*(max - min)+min)
     }
     //pull googleSignIn info
-    const { email, familyName, givenName } = req.body.profileObj.email;
-    const  id = req.body.googleId;
+    const { email, familyName, givenName, googleId } = req.body.profileObj;
     //creates random number string 
+    const hashedPassword = await bcrypt.hash(googleId, 12);
     const randomPackGen = parseInt(`${randomNumbGen(10,1)}0${randomNumbGen(10,1)}0${randomNumbGen(10,1)}0${randomNumbGen(10,1)}`)
     try{
         const existingUser = await User.findOne({email});
         if(!existingUser){
             const result = await User.create({
-                email,
-                id,
+                password: hashedPassword,
+                email: email,
                 name: `${givenName} ${familyName}`,
                 //build placeholder (hopefully non duplicate) packleader UserName
                 userName: `PackLeader_${randomPackGen}`
@@ -86,13 +85,14 @@ export const googleSignIn = async (req, res) => {
                 userName: result.userName
             }, "test", {expiresIn: '1h'})
             res.status(200).json({result, token})
+        }else if( existingUser){
+            const token = jwt.sign({
+                email: existingUser.email,
+                id: existingUser._id,
+                userName: existingUser.userName
+            }, 'test', {expiresIn: '1h'});
+            res.status(200).json({result: existingUser, token});
         }
-        const token = jwt.sign({
-            email: existingUser.email,
-            id: existingUser._id,
-            userName: existingUser.userName
-        }, 'test', {expiresIn: '1h'});
-        res.status(200).json({result: existingUser, token});
 
     }catch( error){
         console.log(error)
