@@ -55,12 +55,12 @@ const Auth = ()=>{
     }
 
     const googleSuccess = async (res)=>{
-        const result = res?.profileObj;
-        const token = res?.tokenId;
+        // const result = res?.profileObj;
+        // const token = res?.tokenId;
         console.log(res);
         try{
             dispatch(googleSignIn(res, navigate))
-            dispatch({ type: 'AUTH', data:{result, token}})
+            // dispatch({ type: 'AUTH', data:{result, token}})
             navigate('/');
         }catch(err){
             console.log(err)

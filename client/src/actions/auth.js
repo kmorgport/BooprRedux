@@ -28,7 +28,7 @@ export const googleSignIn = (res, navigate) => async (dispatch)=>{
     try{
 
         const { data } = await api.googleSignIn(res);
-        dispatch({ type: GOOGLE, data})
+        dispatch({ type: AUTH, data})
         navigate('/')
 
     }catch (error){
