@@ -48,7 +48,7 @@ return (
                 <Typography variant="h6">
                     Pup Pal of:
                     <Link to={`/owners/${dog.owner}`} style={{ textDecoration: 'none', color: '#3f51b5'}}>
-                        {`${dog.owner}`}
+                        {`${dog.ownerUserName}`}
                     </Link>
                 </Typography>
                 <Typography variant="body1">{moment(dog.createdAt).fromNow()}</Typography>

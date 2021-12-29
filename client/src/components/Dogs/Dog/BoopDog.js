@@ -10,6 +10,7 @@ import { boopDog, deleteDog } from '../../../actions/dogs';
 
 const BooprDog = ({ dog, setCurrentId }) =>{
     const user = JSON.parse(localStorage.getItem('profile'));
+    console.log(user);
     const [boops, setBoops] = useState(dog?.boops);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -69,7 +70,7 @@ const BooprDog = ({ dog, setCurrentId }) =>{
             <Button size="small" color="primary" disabled={!user?.result} onClick={handleBoop}>
                     <Boops/>
                 </Button>
-                {(user?.result?.googleId === dog?.creator || user?.result?._id === dog?.creator)&&(
+                {(user?.result?._id === dog?.creator)&&(
                     <Button size="small" color="secondary" onClick={()=> dispatch(deleteDog(dog._id))}>
                         <DeleteIcon fontSize="small"/>&nbsp; Delete
                     </Button>
