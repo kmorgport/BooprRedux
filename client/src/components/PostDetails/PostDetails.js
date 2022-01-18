@@ -13,7 +13,6 @@ const Dog = ()=>{
     const userId = user?.result.googleId || user?.result?._id;
     const { dog, isLoading } = useSelector((state)=> state.dogs);
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
     const classes = useStyles();
     const { id } = useParams();
 
@@ -48,7 +47,7 @@ return (
                 <Typography variant="h6">
                     Pup Pal of:
                     <Link to={`/owners/${dog.owner}`} style={{ textDecoration: 'none', color: '#3f51b5'}}>
-                        {`${dog.ownerUserName}`}
+                        {` ${dog.ownerUserName}`}
                     </Link>
                 </Typography>
                 <Typography variant="body1">{moment(dog.createdAt).fromNow()}</Typography>
